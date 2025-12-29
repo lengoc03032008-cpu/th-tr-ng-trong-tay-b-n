@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="vi" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thị Trường Trong Tay Bạn</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    @keyframes gradient-flow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes float-smooth {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-12px) rotate(-3deg); }
+      75% { transform: translateY(-8px) rotate(3deg); }
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { box-shadow: 0 0 0 30px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    @keyframes shine-sweep {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+
+    @keyframes bounce-scale {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    @keyframes slide-in-left {
+      0% { transform: translateX(-100px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slide-in-right {
+      0% { transform: translateX(100px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fade-in-up {
+      0% { transform: translateY(40px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+
+    @keyframes pop-in {
+      0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+      70% { transform: scale(1.2) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    @keyframes neon-glow {
+      0%, 100% { 
+        filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 20px currentColor);
+      }
+      50% { 
+        filter: drop-shadow(0 0 20px currentColor) drop-shadow(0 0 40px currentColor) drop-shadow(0 0 60px currentColor);
+      }
+    }
+
+    @keyframes confetti-burst {
+      0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: translateY(800px) rotate(720deg) scale(0.5); opacity: 0; }
+    }
+
+    @keyframes card-flip {
+      0% { transform: perspective(1000px) rotateY(0); }
+      50% { transform: perspective(1000px) rotateY(90deg); }
+      100% { transform: perspective(1000px) rotateY(0); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 215, 0, 0.6), 0 0 120px rgba(255, 215, 0, 0.4); }
+    }
+
+    .animated-gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+      background-size: 400% 400%;
+      animation: gradient-flow 15s ease infinite;
+    }
+
+    .float-smooth {
+      animation: float-smooth 4s ease-in-out infinite;
+    }
+
+    .pulse-ring {
+      animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+    }
+
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine-effect::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine-sweep 3s infinite;
+    }
+
+    .bounce-scale {
+      animation: bounce-scale 2s ease-in-out infinite;
+    }
+
+    .sparkle-effect {
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    .slide-in-left {
+      animation: slide-in-left 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .slide-in-right {
+      animation: slide-in-right 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .fade-in-up {
+      animation: fade-in-up 0.6s ease-out;
+    }
+
+    .wiggle-animation {
+      animation: wiggle 0.5s ease-in-out;
+    }
+
+    .pop-in {
+      animation: pop-in 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .neon-glow {
+      animation: neon-glow 2s ease-in-out infinite;
+    }
+
+    .confetti-particle {
+      position: fixed;
+      pointer-events: none;
+      animation: confetti-burst 3s ease-out forwards;
+      z-index: 9999;
+    }
+
+    .card-flip-animate {
+      animation: card-flip 0.8s ease-in-out;
+    }
+
+    .glow-pulse {
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+
+    .glass-morphism {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(30px) saturate(180%);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .card-3d-transform {
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .card-3d-transform:hover {
+      transform: translateY(-15px) scale(1.05) rotateX(5deg);
+    }
+
+    .investment-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      width: 100%;
+      height: 14px;
+      border-radius: 7px;
+      outline: none;
+      background: linear-gradient(to right, #e5e7eb 0%, #e5e7eb 100%);
+      transition: all 0.3s ease;
+    }
+
+    .investment-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: grab;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.6), 0 0 0 4px rgba(255,255,255,0.3);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 3px solid white;
+    }
+
+    .investment-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.4);
+      box-shadow: 0 6px 25px rgba(102, 126, 234, 0.9), 0 0 0 6px rgba(255,255,255,0.4);
+    }
+
+    .investment-slider::-webkit-slider-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.2);
+    }
+
+    .investment-slider::-moz-range-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      cursor: grab;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.6), 0 0 0 4px rgba(255,255,255,0.3);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      border: 3px solid white;
+    }
+
+    .progress-bar-animated {
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .progress-bar-animated::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shine-sweep 2s infinite;
+    }
+
+    .sector-icon {
+      font-size: 4rem;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3));
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: inline-block;
+    }
+
+    .sector-card:hover .sector-icon {
+      transform: scale(1.3) rotate(15deg) translateY(-10px);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.4));
+    }
+
+    .holographic-effect {
+      background: linear-gradient(135deg, 
+        rgba(255,255,255,0.3) 0%,
+        rgba(255,255,255,0.1) 25%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0.1) 75%,
+        rgba(255,255,255,0.3) 100%);
+      background-size: 200% 200%;
+      animation: gradient-flow 8s ease infinite;
+    }
+
+    .text-neon {
+      text-shadow: 
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 40px currentColor,
+        0 0 80px currentColor;
+      animation: neon-glow 2s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      .sector-icon {
+        font-size: 2.5rem;
+      }
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 5px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .strategy-card-selected {
+      animation: glow-pulse 1.5s ease-in-out infinite;
+      transform: scale(1.08);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full animated-gradient-bg">
+  <div class="w-full h-full overflow-auto">
+   <div class="min-h-full px-4 py-6 sm:px-6 lg:px-8"><!-- Epic Animated Header -->
+    <header class="glass-morphism rounded-3xl p-6 md:p-12 mb-8 pop-in relative overflow-hidden">
+     <div class="absolute top-0 left-0 w-full h-full holographic-effect opacity-30 pointer-events-none"></div>
+     <div class="text-center relative z-10">
+      <div class="float-smooth inline-block mb-6"><span class="text-7xl md:text-9xl bounce-scale">💰📈🏆</span>
+      </div>
+      <h1 id="game-title" class="text-5xl md:text-8xl font-black text-white mb-4 text-neon" style="text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(102,126,234,0.6)">THỊ TRƯỜNG TRONG TAY BẠN</h1>
+      <p id="game-subtitle" class="text-xl md:text-3xl text-white/95 mb-8 font-bold animate-pulse">Mô phỏng thị trường đầu tư - Chinh phục đỉnh cao tài chính!</p><!-- Enhanced Stats Bar -->
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+       <div class="glass-morphism px-6 py-4 rounded-2xl hover:scale-110 transition-all duration-500 shine-effect cursor-pointer slide-in-left" style="animation-delay: 0.1s">
+        <div class="text-4xl md:text-5xl mb-2 bounce-scale">
+         👥
+        </div>
+        <div class="text-white font-black text-base md:text-lg">
+         28 Người chơi
+        </div>
+       </div>
+       <div class="glass-morphism px-6 py-4 rounded-2xl hover:scale-110 transition-all duration-500 shine-effect cursor-pointer slide-in-left" style="animation-delay: 0.2s">
+        <div class="text-4xl md:text-5xl mb-2 bounce-scale">
+         🎲
+        </div>
+        <div class="text-white font-black text-base md:text-lg">
+         5 Nhóm
+        </div>
+       </div>
+       <div class="glass-morphism px-6 py-4 rounded-2xl hover:scale-110 transition-all duration-500 shine-effect cursor-pointer slide-in-left" style="animation-delay: 0.3s">
+        <div class="text-4xl md:text-5xl mb-2 bounce-scale">
+         💎
+        </div>
+        <div class="text-white font-black text-base md:text-lg">
+         100 Điểm/Nhóm
+        </div>
+       </div>
+       <div class="glass-morphism px-6 py-4 rounded-2xl hover:scale-110 transition-all duration-500 shine-effect cursor-pointer slide-in-right" style="animation-delay: 0.4s">
+        <div class="text-4xl md:text-5xl mb-2 bounce-scale">
+         🎯
+        </div>
+        <div class="text-white font-black text-base md:text-lg">
+         3 Vòng
+        </div>
+       </div>
+       <div class="glass-morphism px-6 py-4 rounded-2xl hover:scale-110 transition-all duration-500 shine-effect cursor-pointer slide-in-right" style="animation-delay: 0.5s">
+        <div class="text-4xl md:text-5xl mb-2 bounce-scale">
+         📊
+        </div>
+        <div class="text-white font-black text-base md:text-lg">
+         5 Lĩnh vực
+        </div>
+       </div>
+      </div>
+     </div>
+    </header><!-- Round Tabs with 3D Effect -->
+    <div class="glass-morphism rounded-3xl shadow-2xl p-6 mb-8 fade-in-up relative overflow-hidden">
+     <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
+     <div class="flex flex-wrap gap-4 mb-6"><button class="round-tab flex-1 min-w-[160px] px-6 py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-105 shine-effect card-3d-transform bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-2xl pulse-ring" data-round="1">
+       <div class="flex flex-col items-center justify-center gap-2"><span class="text-3xl float-smooth">🏦</span> <span id="round1-name">Vòng 1: Ổn định</span>
+       </div></button> <button class="round-tab flex-1 min-w-[160px] px-6 py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-105 shine-effect card-3d-transform bg-gray-100 text-gray-600" data-round="2">
+       <div class="flex flex-col items-center justify-center gap-2"><span class="text-3xl">⚡</span> <span id="round2-name">Vòng 2: Biến động</span>
+       </div></button> <button class="round-tab flex-1 min-w-[160px] px-6 py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-105 shine-effect card-3d-transform bg-gray-100 text-gray-600" data-round="3">
+       <div class="flex flex-col items-center justify-center gap-2"><span class="text-3xl">🎯</span> <span id="round3-name">Vòng 3: Chiến lược</span>
+       </div></button> <button class="round-tab flex-1 min-w-[160px] px-6 py-5 rounded-2xl font-black text-lg transition-all duration-500 transform hover:scale-105 shine-effect card-3d-transform bg-gray-100 text-gray-600" data-round="4">
+       <div class="flex flex-col items-center justify-center gap-2"><span class="text-3xl">🏆</span> <span>Kết quả</span>
+       </div></button>
+     </div><!-- Round Info -->
+     <div id="round-info" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-6 border-4 border-purple-200 shadow-inner"></div>
+    </div><!-- Market Event Banner -->
+    <div id="market-event-banner" class="hidden mb-8"></div><!-- Event Selector for Round 2 AFTER investments -->
+    <div id="event-selector" class="hidden mb-8"></div><!-- Sectors Display -->
+    <div id="sectors-container" class="mb-8"></div><!-- Victory Screen -->
+    <div id="victory-screen" class="hidden mb-8"></div><!-- Groups Container -->
+    <div id="groups-container" class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6 mb-8"></div><!-- Enhanced Leaderboard -->
+    <div class="glass-morphism rounded-3xl shadow-2xl p-8 md:p-12 fade-in-up relative overflow-hidden">
+     <div class="absolute inset-0 holographic-effect opacity-20 pointer-events-none"></div>
+     <div class="text-center mb-10 relative z-10">
+      <div class="float-smooth inline-block mb-6"><span class="text-7xl md:text-9xl glow-pulse">🏆</span>
+      </div>
+      <h2 class="text-4xl md:text-6xl font-black mb-3 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent text-neon">BẢNG XẾP HẠNG</h2>
+      <p class="text-white text-lg md:text-xl font-bold">Những nhà đầu tư xuất sắc nhất</p>
+     </div>
+     <div id="leaderboard-list" class="space-y-5 relative z-10"></div>
+    </div><!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      game_title: "THỊ TRƯỜNG TRONG TAY BẠN",
+      game_subtitle: "Mô phỏng thị trường đầu tư - Chinh phục đỉnh cao tài chính!",
+      round1_name: "Vòng 1: Ổn định",
+      round2_name: "Vòng 2: Biến động",
+      round3_name: "Vòng 3: Chiến lược"
+    };
+
+    let currentRound = 1;
+    let allInvestments = [];
+    let selectedMarketEvent = null;
+    let selectedMarketEvents = [];
+
+    const GROUPS = [
+      { id: "group1", name: "Nhóm 1: Chiến binh", emoji: "⚔️", character: "🧙‍♂️", color: "#ef4444", gradient: "from-red-500 via-red-600 to-red-700", members: "7-9 người" },
+      { id: "group2", name: "Nhóm 2: Phượng hoàng", emoji: "🔥", character: "🦸‍♀️", color: "#f59e0b", gradient: "from-amber-500 via-orange-500 to-orange-600", members: "7-9 người" },
+      { id: "group3", name: "Nhóm 3: Rồng vàng", emoji: "🐲", character: "🤴", color: "#10b981", gradient: "from-emerald-500 via-green-500 to-green-600", members: "7-9 người" },
+      { id: "group4", name: "Nhóm 4: Đại bàng", emoji: "🦅", character: "👸", color: "#3b82f6", gradient: "from-blue-500 via-indigo-500 to-indigo-600", members: "7-9 người" },
+      { id: "group5", name: "Nhóm 5: Sư tử", emoji: "🦁", character: "🧝‍♀️", color: "#8b5cf6", gradient: "from-purple-500 via-violet-500 to-violet-600", members: "7-9 người" }
+    ];
+
+    const MARKET_EVENTS = [
+      { 
+        id: "crisis", 
+        name: "💥 Khủng hoảng kinh tế", 
+        desc: "Suy thoái toàn cầu! Hầu hết lĩnh vực bị ảnh hưởng nghiêm trọng",
+        returns: { savings: 5, stocks: -30, business: -20, realestate: -15, sustainable: 10 },
+        icon: "💥",
+        detail: "🏦 GTK: +5% (An toàn) • 📈 CK: -30% (Sụp đổ) • 💼 KD: -20% (Giảm mạnh) • 🏠 BĐS: -15% (Sụt giá) • 🌱 ĐTBV: +10% (Tăng nhẹ)"
+      },
+      { 
+        id: "bubble", 
+        name: "📈 Bong bóng chứng khoán", 
+        desc: "Thị trường chứng khoán tăng vọt rồi sụp đổ!",
+        returns: { savings: 8, stocks: -40, business: 15, realestate: 5, sustainable: 12 },
+        icon: "📉",
+        detail: "🏦 GTK: +8% (Ổn định) • 📈 CK: -40% (Nổ bong bóng) • 💼 KD: +15% (Hưởng lợi) • 🏠 BĐS: +5% (Tăng nhẹ) • 🌱 ĐTBV: +12% (Phát triển)"
+      },
+      { 
+        id: "pandemic", 
+        name: "🦠 Dịch bệnh / Thiên tai", 
+        desc: "Dịch bệnh lan rộng! Chỉ một số lĩnh vực tồn tại",
+        returns: { savings: 7, stocks: -25, business: -30, realestate: -20, sustainable: 20 },
+        icon: "🦠",
+        detail: "🏦 GTK: +7% (An toàn) • 📈 CK: -25% (Giảm mạnh) • 💼 KD: -30% (Đóng cửa) • 🏠 BĐS: -20% (Sụt giá) • 🌱 ĐTBV: +20% (Phát triển mạnh)"
+      },
+      { 
+        id: "policy", 
+        name: "📜 Chính sách thay đổi", 
+        desc: "Chính phủ ban hành chính sách mới ảnh hưởng thị trường",
+        returns: { savings: 10, stocks: 20, business: -10, realestate: 15, sustainable: 25 },
+        icon: "📜",
+        detail: "🏦 GTK: +10% (H�� trợ) • 📈 CK: +20% (Khởi sắc) • 💼 KD: -10% (Hạn chế) • 🏠 BĐS: +15% (Tăng giá) • 🌱 ĐTBV: +25% (Ưu đãi lớn)"
+      }
+    ];
+
+    const ROUNDS = {
+      1: {
+        name: "🏦 Vòng 1: Thị trường ổn định",
+        description: "📊 Thị trường đang trong giai đoạn ổn định. Đây là cơ hội để học cách phân bổ vốn một cách thông minh và cân bằng!",
+        rule: "⚠️ QUY TẮC: Không được đầu tư >50% vào 1 lĩnh vực. Vi phạm trừ 5 điểm mỗi lĩnh vực!",
+        tip: "💡 MẸO: Đa dạng hóa danh mục để giảm rủi ro. Đừng đặt tất cả trứng vào một giỏ!",
+        sectors: [
+          { id: "savings", name: "Gửi tiết kiệm", icon: "🏦", return: 7, desc: "An toàn nhất", gradient: "from-blue-400 via-blue-500 to-blue-600" },
+          { id: "stocks", name: "Chứng khoán", icon: "📈", return: 10, desc: "Tiềm năng t��t", gradient: "from-green-400 via-green-500 to-green-600" },
+          { id: "business", name: "Kinh doanh", icon: "💼", return: 15, desc: "Lợi nhuận cao", gradient: "from-purple-400 via-purple-500 to-purple-600" },
+          { id: "realestate", name: "Bất động sản", icon: "🏠", return: 8, desc: "Ổn định lâu dài", gradient: "from-orange-400 via-orange-500 to-orange-600" },
+          { id: "sustainable", name: "Đ��u tư bền vững", icon: "🌱", return: 5, desc: "Tương lai xanh", gradient: "from-emerald-400 via-emerald-500 to-emerald-600" }
+        ]
+      },
+      2: {
+        name: "⚡ Vòng 2: Biến động thị trường",
+        description: "🌪️ Thị trường có thể gặp 4 biến cố bất ngờ: 💥 Khủng hoảng kinh tế • 📈 Bong bóng chứng khoán • 🦠 Dịch bệnh/Thiên tai • 📜 Chính sách thay đổi",
+        rule: "⚠️ QUY TẮC: Các nhóm đầu tư TRƯỚC (không biết tỷ lệ), sau đó admin công bố biến cố và hệ thống tính lại điểm!",
+        tip: "💡 MẸO: Đây là vòng RỦI RO! Đầu tư cẩn thận và đa dạng hóa để giảm thiệt hại khi có biến cố bất ngờ!",
+        hasMarketEvent: true,
+        requiresEventFirst: false,
+        hideReturnsBeforeEvent: true,
+        sectors: [
+          { id: "savings", name: "Gửi tiết kiệm", icon: "🏦", return: 7, desc: "???", gradient: "from-blue-400 via-blue-500 to-blue-600" },
+          { id: "stocks", name: "Chứng khoán", icon: "📈", return: 10, desc: "???", gradient: "from-green-400 via-green-500 to-green-600" },
+          { id: "business", name: "Kinh doanh", icon: "💼", return: 15, desc: "???", gradient: "from-purple-400 via-purple-500 to-purple-600" },
+          { id: "realestate", name: "Bất động sản", icon: "🏠", return: 8, desc: "???", gradient: "from-orange-400 via-orange-500 to-orange-600" },
+          { id: "sustainable", name: "Đầu tư bền vững", icon: "🌱", return: 5, desc: "???", gradient: "from-emerald-400 via-emerald-500 to-emerald-600" }
+        ]
+      },
+      3: {
+        name: "🎯 Vòng 3: Lựa chọn chiến lược",
+        description: "🏁 Vòng cuối! Chọn chiến lược đầu tư dài hạn. Quyết định này sẽ định hình tương lai của nhóm!",
+        rule: "🎮 CHỌN CHIẾN LƯỢC: Lợi nhuận nhanh hay Phát triển bền vững? Suy nghĩ kỹ!",
+        tip: "💡 MẸO: Không có lựa chọn nào là tuyệt đối. Hãy cân nhắc giá trị dài hạn!",
+        hasStrategy: true,
+        strategies: [
+          {
+            id: "quick_profit",
+            name: "⚡ Lợi nhuận nhanh",
+            icon: "⚡",
+            desc: "Tăng trưởng nhanh, rủi ro cao",
+            effect: "+20%",
+            penalty: "Trừ 10 điểm",
+            color: "red",
+            tooltip: "Tập trung vào lợi nhuận ngắn hạn"
+          },
+          {
+            id: "sustainable",
+            name: "🌱 Đầu tư bền vững",
+            icon: "🌱",
+            desc: "Tăng trưởng ổn định, lợi ích xã hội",
+            effect: "+10%",
+            penalty: "Cộng 17 điểm",
+            color: "green",
+            tooltip: "Tạo giá trị lâu dài cho xã hội"
+          }
+        ]
+      }
+    };
+
+    const dataHandler = {
+      onDataChanged(data) {
+        allInvestments = data;
+        updateLeaderboard();
+        updateGroupsDisplay();
+        
+        // Check if all groups have invested in round 2 and no event selected yet
+        if (currentRound === 2 && selectedMarketEvents.length === 0) {
+          const round2Investments = allInvestments.filter(inv => inv.round === 2);
+          const uniqueGroups = new Set(round2Investments.map(inv => inv.group_id));
+          
+          if (uniqueGroups.size === GROUPS.length) {
+            showEventSelector();
+          }
+        }
+      }
+    };
+
+    async function init() {
+      const initResult = await window.dataSdk.init(dataHandler);
+      if (!initResult.isOk) {
+        showToast("❌ Không thể kết nối hệ thống", "error");
+        return;
+      }
+
+      if (window.elementSdk) {
+        await window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.getElementById('game-title').textContent = config.game_title || defaultConfig.game_title;
+            document.getElementById('game-subtitle').textContent = config.game_subtitle || defaultConfig.game_subtitle;
+            document.getElementById('round1-name').textContent = config.round1_name || defaultConfig.round1_name;
+            document.getElementById('round2-name').textContent = config.round2_name || defaultConfig.round2_name;
+            document.getElementById('round3-name').textContent = config.round3_name || defaultConfig.round3_name;
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["game_title", config.game_title || defaultConfig.game_title],
+            ["game_subtitle", config.game_subtitle || defaultConfig.game_subtitle],
+            ["round1_name", config.round1_name || defaultConfig.round1_name],
+            ["round2_name", config.round2_name || defaultConfig.round2_name],
+            ["round3_name", config.round3_name || defaultConfig.round3_name]
+          ])
+        });
+      }
+
+      setupRoundTabs();
+      updateRoundDisplay();
+      updateGroupsDisplay();
+      updateLeaderboard();
+    }
+
+    function setupRoundTabs() {
+      document.querySelectorAll('.round-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.round-tab').forEach(t => {
+            t.classList.remove('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'shadow-2xl', 'pulse-ring');
+            t.classList.add('bg-gray-100', 'text-gray-600');
+          });
+          
+          tab.classList.remove('bg-gray-100', 'text-gray-600');
+          tab.classList.add('bg-gradient-to-r', 'from-blue-500', 'to-purple-600', 'text-white', 'shadow-2xl', 'pulse-ring');
+          
+          tab.classList.add('card-flip-animate');
+          setTimeout(() => tab.classList.remove('card-flip-animate'), 800);
+          
+          currentRound = parseInt(tab.dataset.round);
+          updateRoundDisplay();
+          updateGroupsDisplay();
+        });
+      });
+    }
+
+    function updateRoundDisplay() {
+      const round = ROUNDS[currentRound];
+      const infoDiv = document.getElementById('round-info');
+      const sectorsContainer = document.getElementById('sectors-container');
+      const groupsContainer = document.getElementById('groups-container');
+      const victoryScreen = document.getElementById('victory-screen');
+      const leaderboard = document.querySelector('.glass-morphism.rounded-3xl.shadow-2xl.p-8');
+      const marketEventBanner = document.getElementById('market-event-banner');
+      const eventSelector = document.getElementById('event-selector');
+
+      if (currentRound === 4) {
+        victoryScreen.classList.remove('hidden');
+        sectorsContainer.innerHTML = '';
+        groupsContainer.innerHTML = '';
+        infoDiv.innerHTML = '';
+        marketEventBanner.classList.add('hidden');
+        eventSelector.classList.add('hidden');
+        if (leaderboard) leaderboard.classList.add('hidden');
+        displayVictoryScreen();
+        return;
+      } else {
+        victoryScreen.classList.add('hidden');
+        groupsContainer.classList.remove('hidden');
+        if (leaderboard) leaderboard.classList.remove('hidden');
+      }
+      
+      let html = `
+        <div class="space-y-5">
+          <h3 class="text-3xl md:text-5xl font-black text-purple-900">${round.name}</h3>
+          <p class="text-lg md:text-xl text-gray-800 font-bold leading-relaxed">${round.description}</p>
+          <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 border-l-4 border-yellow-600 p-5 rounded-r-2xl shadow-lg">
+            <p class="text-base md:text-lg text-yellow-900 font-black">${round.rule}</p>
+          </div>
+          ${round.tip ? `
+          <div class="bg-gradient-to-r from-blue-100 to-blue-200 border-l-4 border-blue-600 p-5 rounded-r-2xl shadow-lg">
+            <p class="text-base md:text-lg text-blue-900 font-black">${round.tip}</p>
+          </div>
+          ` : ''}
+        </div>
+      `;
+      
+      infoDiv.innerHTML = html;
+
+      if (currentRound === 2) {
+        if (selectedMarketEvents.length > 0) {
+          showMarketEventBanners();
+          showEventSelector();
+        } else {
+          marketEventBanner.classList.add('hidden');
+          
+          // Check if all groups invested
+          const round2Investments = allInvestments.filter(inv => inv.round === 2);
+          const uniqueGroups = new Set(round2Investments.map(inv => inv.group_id));
+          
+          if (uniqueGroups.size === GROUPS.length) {
+            showEventSelector();
+          } else {
+            eventSelector.classList.add('hidden');
+          }
+        }
+        
+        // Only show sectors AFTER event is selected
+        if (round.sectors && selectedMarketEvents.length > 0) {
+          const activeEvent = selectedMarketEvents[selectedMarketEvents.length - 1];
+          sectorsContainer.innerHTML = `
+            <div class="glass-morphism rounded-3xl shadow-2xl p-6 md:p-10 relative overflow-hidden">
+              <div class="absolute inset-0 holographic-effect opacity-20 pointer-events-none"></div>
+              <h3 class="text-3xl md:text-5xl font-black text-center mb-8 text-white text-neon relative z-10">
+                📊 TỶ LỆ SAU BIẾN CỐ (${activeEvent.name})
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 relative z-10">
+                ${round.sectors.map((sector, idx) => {
+                  const eventReturn = activeEvent.returns[sector.id];
+                  const isPositive = eventReturn > 0;
+                  return `
+                  <div class="sector-card card-3d-transform bg-gradient-to-br ${sector.gradient} rounded-3xl p-6 text-white shadow-2xl pop-in cursor-pointer hover:shadow-3xl shine-effect relative overflow-hidden" style="animation-delay: ${idx * 0.1}s">
+                    <div class="absolute inset-0 holographic-effect opacity-30 pointer-events-none"></div>
+                    <div class="sector-icon text-center mb-3 relative z-10">${sector.icon}</div>
+                    <h4 class="text-center font-black text-base md:text-lg mb-2 relative z-10">${sector.name}</h4>
+                    <div class="text-center relative z-10">
+                      <div class="text-4xl md:text-5xl font-black mb-2 bounce-scale ${isPositive ? 'text-green-200' : 'text-red-200'}">${eventReturn > 0 ? '+' : ''}${eventReturn}%</div>
+                      <div class="text-sm md:text-base opacity-95 font-bold">${isPositive ? 'Lời' : 'Lỗ'}</div>
+                    </div>
+                  </div>
+                `}).join('')}
+              </div>
+            </div>
+          `;
+        } else if (selectedMarketEvents.length === 0) {
+          sectorsContainer.innerHTML = '';
+        }
+      } else {
+        marketEventBanner.classList.add('hidden');
+        eventSelector.classList.add('hidden');
+        
+        if (round.sectors) {
+          sectorsContainer.innerHTML = `
+            <div class="glass-morphism rounded-3xl shadow-2xl p-6 md:p-10 relative overflow-hidden">
+              <div class="absolute inset-0 holographic-effect opacity-20 pointer-events-none"></div>
+              <h3 class="text-3xl md:text-5xl font-black text-center mb-8 text-white text-neon relative z-10">
+                📊 CÁC LĨNH VỰC ĐẦU TƯ
+              </h3>
+              <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 relative z-10">
+                ${round.sectors.map((sector, idx) => `
+                  <div class="sector-card card-3d-transform bg-gradient-to-br ${sector.gradient} rounded-3xl p-6 text-white shadow-2xl pop-in cursor-pointer hover:shadow-3xl shine-effect relative overflow-hidden" style="animation-delay: ${idx * 0.1}s">
+                    <div class="absolute inset-0 holographic-effect opacity-30 pointer-events-none"></div>
+                    <div class="sector-icon text-center mb-3 relative z-10">${sector.icon}</div>
+                    <h4 class="text-center font-black text-base md:text-lg mb-2 relative z-10">${sector.name}</h4>
+                    <div class="text-center relative z-10">
+                      <div class="text-4xl md:text-5xl font-black mb-2 bounce-scale">+${sector.return}%</div>
+                      <div class="text-sm md:text-base opacity-95 font-bold">${sector.desc}</div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } else {
+          sectorsContainer.innerHTML = '';
+        }
+      }
+    }
+
+    function showEventSelector() {
+      const eventSelector = document.getElementById('event-selector');
+      eventSelector.classList.remove('hidden');
+      
+      const availableEvents = MARKET_EVENTS.filter(e => 
+        !selectedMarketEvents.some(se => se.id === e.id)
+      );
+      
+      const allEventsSelected = selectedMarketEvents.length === MARKET_EVENTS.length;
+      
+      eventSelector.innerHTML = `
+        <div class="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 md:p-10 bounce-in border-4 border-red-500">
+          <div class="text-center mb-6">
+            <div class="text-5xl md:text-7xl mb-4 float-smooth">🎲</div>
+            <h3 class="text-3xl md:text-5xl font-black mb-3 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+              ${selectedMarketEvents.length === 0 ? '🚨 TẤT CẢ NHÓM ĐÃ ĐẦU TƯ! 🚨' : '🎲 CHỌN SỰ KIỆN TIẾP THEO 🎲'}
+            </h3>
+            <p class="text-base md:text-xl text-gray-700 font-semibold mb-2">
+              ${allEventsSelected 
+                ? '✅ Đã công bố hết tất cả 4 sự kiện!' 
+                : `Admin hãy chọn sự kiện thị trường (${selectedMarketEvents.length}/4)`}
+            </p>
+            ${!allEventsSelected ? '<p class="text-sm md:text-base text-red-600 font-black">⚠️ Các nhóm sẽ thấy điểm thay đổi ngay lập tức!</p>' : ''}
+          </div>
+          
+          ${availableEvents.length > 0 ? `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+            ${availableEvents.map(event => `
+              <button class="event-choice-btn group p-6 md:p-8 rounded-3xl border-4 border-gray-300 bg-white hover:border-red-500 transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left" data-event-id="${event.id}">
+                <div class="text-5xl md:text-6xl mb-4 group-hover:scale-110 transition-transform text-center">${event.icon}</div>
+                <h4 class="text-xl md:text-2xl font-black text-gray-800 mb-3">${event.name}</h4>
+                <p class="text-sm md:text-base text-gray-600 mb-4">${event.desc}</p>
+                
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-3 mb-3">
+                  <p class="text-xs md:text-sm font-bold text-gray-700 leading-relaxed">${event.detail}</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                  <div class="bg-blue-100 rounded-lg p-2">
+                    <div class="font-bold text-blue-800">🏦 GTK</div>
+                    <div class="font-black ${event.returns.savings > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.savings > 0 ? '+' : ''}${event.returns.savings}%</div>
+                  </div>
+                  <div class="bg-green-100 rounded-lg p-2">
+                    <div class="font-bold text-green-800">📈 CK</div>
+                    <div class="font-black ${event.returns.stocks > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.stocks > 0 ? '+' : ''}${event.returns.stocks}%</div>
+                  </div>
+                  <div class="bg-purple-100 rounded-lg p-2">
+                    <div class="font-bold text-purple-800">💼 KD</div>
+                    <div class="font-black ${event.returns.business > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.business > 0 ? '+' : ''}${event.returns.business}%</div>
+                  </div>
+                  <div class="bg-orange-100 rounded-lg p-2">
+                    <div class="font-bold text-orange-800">🏠 BĐS</div>
+                    <div class="font-black ${event.returns.realestate > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.realestate > 0 ? '+' : ''}${event.returns.realestate}%</div>
+                  </div>
+                  <div class="bg-emerald-100 rounded-lg p-2 col-span-2">
+                    <div class="font-bold text-emerald-800">🌱 ĐTBV</div>
+                    <div class="font-black ${event.returns.sustainable > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.sustainable > 0 ? '+' : ''}${event.returns.sustainable}%</div>
+                  </div>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+          ` : '<p class="text-2xl text-center font-black text-green-600">🎉 Đã công bố hết tất cả sự kiện! 🎉</p>'}
+        </div>
+      `;
+      
+      eventSelector.querySelectorAll('.event-choice-btn').forEach(btn => {
+        btn.addEventListener('click', async function() {
+          const eventId = this.dataset.eventId;
+          const newEvent = MARKET_EVENTS.find(e => e.id === eventId);
+          
+          this.classList.add('card-flip-animate');
+          createConfetti('#ff0000');
+          
+          selectedMarketEvents.push(newEvent);
+          selectedMarketEvent = newEvent;
+          
+          // Recalculate all round 2 investments with the new event
+          await recalculateRound2Investments(newEvent);
+          
+          setTimeout(() => {
+            updateRoundDisplay();
+            updateGroupsDisplay();
+            showToast(`🎲 Sự kiện "${newEvent.name}" đã xảy ra! Điểm đã được cập nhật! (${selectedMarketEvents.length}/4)`, 'success');
+          }, 600);
+        });
+      });
+    }
+
+    async function recalculateRound2Investments(event) {
+      const round2Investments = allInvestments.filter(inv => inv.round === 2);
+      
+      for (const investment of round2Investments) {
+        // Calculate new earnings based on event
+        let newEarnings = 0;
+        newEarnings += (investment.savings || 0) * event.returns.savings / 100;
+        newEarnings += (investment.stocks || 0) * event.returns.stocks / 100;
+        newEarnings += (investment.business || 0) * event.returns.business / 100;
+        newEarnings += (investment.realestate || 0) * event.returns.realestate / 100;
+        newEarnings += (investment.sustainable || 0) * event.returns.sustainable / 100;
+        
+        // Find previous total points
+        const previousInvestments = allInvestments.filter(inv => 
+          inv.group_id === investment.group_id && inv.round < 2
+        );
+        let previousTotal = 100;
+        previousInvestments.forEach(inv => {
+          previousTotal = inv.total_points;
+        });
+        
+        // Update the investment record
+        investment.earnings = Math.round(newEarnings);
+        investment.market_event = event.id;
+        investment.total_points = Math.round(previousTotal + newEarnings);
+        
+        const result = await window.dataSdk.update(investment);
+        if (!result.isOk) {
+          console.error('Failed to update investment');
+        }
+      }
+    }
+
+    function showMarketEventBanners() {
+      const banner = document.getElementById('market-event-banner');
+      banner.classList.remove('hidden');
+      banner.innerHTML = `
+        <div class="space-y-4">
+          <h3 class="text-2xl md:text-4xl font-black text-center text-white mb-4">
+            🚨 CÁC SỰ KIỆN ĐÃ XẢY RA (${selectedMarketEvents.length}/4) 🚨
+          </h3>
+          ${selectedMarketEvents.map((event, index) => `
+            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-4 md:p-6 border-4 border-red-500 shadow-2xl">
+              <div class="text-center">
+                <div class="flex items-center justify-center gap-3 mb-3">
+                  <span class="text-3xl md:text-4xl font-black text-red-600">#${index + 1}</span>
+                  <span class="text-4xl md:text-5xl float-smooth">${event.icon}</span>
+                </div>
+                <h4 class="text-xl md:text-2xl font-black text-red-600 mb-2">${event.name}</h4>
+                <p class="text-sm md:text-base text-gray-700 mb-3 font-semibold">${event.desc}</p>
+                
+                <div class="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-3 mb-3 border-2 border-gray-300">
+                  <p class="text-xs md:text-sm font-bold text-gray-700 leading-relaxed">${event.detail}</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-xs md:text-sm">
+                  <div class="bg-white rounded-xl p-2 shadow-lg">
+                    <div class="text-xl md:text-2xl mb-1">🏦</div>
+                    <div class="font-bold text-gray-600 mb-1">GTK</div>
+                    <div class="text-lg md:text-2xl font-black ${event.returns.savings > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.savings > 0 ? '+' : ''}${event.returns.savings}%</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-2 shadow-lg">
+                    <div class="text-xl md:text-2xl mb-1">📈</div>
+                    <div class="font-bold text-gray-600 mb-1">CK</div>
+                    <div class="text-lg md:text-2xl font-black ${event.returns.stocks > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.stocks > 0 ? '+' : ''}${event.returns.stocks}%</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-2 shadow-lg">
+                    <div class="text-xl md:text-2xl mb-1">💼</div>
+                    <div class="font-bold text-gray-600 mb-1">KD</div>
+                    <div class="text-lg md:text-2xl font-black ${event.returns.business > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.business > 0 ? '+' : ''}${event.returns.business}%</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-2 shadow-lg">
+                    <div class="text-xl md:text-2xl mb-1">🏠</div>
+                    <div class="font-bold text-gray-600 mb-1">BĐS</div>
+                    <div class="text-lg md:text-2xl font-black ${event.returns.realestate > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.realestate > 0 ? '+' : ''}${event.returns.realestate}%</div>
+                  </div>
+                  <div class="bg-white rounded-xl p-2 shadow-lg">
+                    <div class="text-xl md:text-2xl mb-1">🌱</div>
+                    <div class="font-bold text-gray-600 mb-1">ĐTBV</div>
+                    <div class="text-lg md:text-2xl font-black ${event.returns.sustainable > 0 ? 'text-green-600' : 'text-red-600'}">${event.returns.sustainable > 0 ? '+' : ''}${event.returns.sustainable}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function updateGroupsDisplay() {
+      const container = document.getElementById('groups-container');
+      container.innerHTML = '';
+
+      GROUPS.forEach((group, index) => {
+        const groupInvestments = allInvestments.filter(inv => inv.group_id === group.id);
+        const currentRoundInv = groupInvestments.filter(inv => inv.round === currentRound);
+        const latestInvestment = currentRoundInv[currentRoundInv.length - 1];
+        
+        let totalPoints = 100;
+        let totalEarnings = 0;
+        let totalPenalty = 0;
+        let totalBonus = 0;
+        
+        groupInvestments.forEach(inv => {
+          if (inv.round <= currentRound) {
+            totalPoints = inv.total_points;
+            totalEarnings += (inv.earnings || 0);
+            totalPenalty += (inv.penalty || 0);
+            totalBonus += (inv.bonus_earned || 0);
+          }
+        });
+
+        const card = document.createElement('div');
+        card.className = 'pop-in';
+        card.style.animationDelay = `${index * 0.15}s`;
+        
+        let cardContent = `
+          <div class="glass-morphism rounded-3xl shadow-2xl p-6 border-4 hover:shadow-3xl transition-all duration-500 h-full card-3d-transform relative overflow-hidden" style="border-color: ${group.color}">
+            
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${group.gradient}"></div>
+            <div class="absolute inset-0 holographic-effect opacity-10 pointer-events-none"></div>
+            
+            <div class="flex items-center justify-between mb-6 pb-4 border-b-4 relative z-10" style="border-color: ${group.color}">
+              <div class="flex items-center gap-3">
+                <div class="float-smooth">
+                  <span class="text-5xl md:text-7xl">${group.character}</span>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-3xl bounce-scale">${group.emoji}</span>
+                    <h3 class="text-lg md:text-2xl font-black text-white">${group.name}</h3>
+                  </div>
+                  <p class="text-sm md:text-base text-white/80 font-bold">👥 ${group.members}</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-4xl md:text-6xl font-black glow-pulse text-white">${totalPoints}</div>
+                <div class="text-sm md:text-base text-white/80 font-bold">điểm</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 mb-5 relative z-10">
+              <div class="bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-3 text-center shine-effect shadow-lg">
+                <div class="text-xs text-white font-bold mb-1">💰 Lãi</div>
+                <div class="text-lg md:text-2xl font-black text-white">+${totalEarnings}</div>
+              </div>
+              <div class="bg-gradient-to-br from-red-400 to-red-600 rounded-2xl p-3 text-center shine-effect shadow-lg">
+                <div class="text-xs text-white font-bold mb-1">⚠️ Phạt</div>
+                <div class="text-lg md:text-2xl font-black text-white">-${totalPenalty}</div>
+              </div>
+              <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl p-3 text-center shine-effect shadow-lg">
+                <div class="text-xs text-white font-bold mb-1">🎁 Thưởng</div>
+                <div class="text-lg md:text-2xl font-black text-white">+${totalBonus}</div>
+              </div>
+            </div>
+        `;
+
+        const round = ROUNDS[currentRound];
+
+        // Don't show investment controls if any event selected in round 2
+        const showInvestmentControls = !(currentRound === 2 && selectedMarketEvents.length > 0);
+
+        if (round.sectors && showInvestmentControls) {
+          cardContent += `
+            <div class="space-y-4 mb-6 relative z-10">
+              ${round.sectors.map(sector => {
+                const value = latestInvestment ? latestInvestment[sector.id] : 0;
+                return `
+                  <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                      <label class="text-sm md:text-base font-black text-white flex items-center gap-2">
+                        <span class="text-2xl md:text-3xl bounce-scale">${sector.icon}</span>
+                        <span>${sector.name}</span>
+                      </label>
+                      <span class="text-xl md:text-3xl font-black px-4 py-2 rounded-xl text-white shine-effect shadow-lg" style="background: ${group.color}" id="${group.id}-${sector.id}-value">${value}</span>
+                    </div>
+                    <input type="range" min="0" max="100" value="${value}" step="5"
+                      class="investment-slider w-full" 
+                      data-group="${group.id}" 
+                      data-sector="${sector.id}"
+                      style="--slider-color: ${group.color}">
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="mb-6 p-4 rounded-2xl relative z-10 shadow-inner" style="background: ${group.color}30">
+              <div class="flex justify-between items-center mb-3">
+                <span class="font-black text-white text-base md:text-lg">📊 Tổng phân bổ:</span>
+                <span class="text-2xl md:text-4xl font-black text-white" id="${group.id}-total">0/100</span>
+              </div>
+              <div class="h-5 bg-gray-800/50 rounded-full overflow-hidden shadow-inner">
+                <div class="progress-bar-animated h-full rounded-full transition-all duration-500" style="background: linear-gradient(90deg, ${group.color}, ${group.color}dd); width: 0%" id="${group.id}-progress"></div>
+              </div>
+            </div>
+          `;
+        }
+
+        if (round.hasStrategy) {
+          cardContent += `
+            <div class="mb-6 relative z-10">
+              <h4 class="font-black text-white mb-4 text-center text-lg md:text-xl">🎯 Chọn chiến lược của nhóm:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${round.strategies.map(strategy => `
+                  <button class="strategy-btn group p-5 rounded-2xl border-4 transition-all duration-500 hover:scale-105 card-3d-transform shine-effect ${latestInvestment?.strategy_choice === strategy.id ? `border-${strategy.color}-400 bg-gradient-to-br from-${strategy.color}-400 to-${strategy.color}-600 text-white shadow-2xl strategy-card-selected` : 'border-white/30 bg-white/10 hover:border-' + strategy.color + '-400 text-white'}" 
+                    data-group="${group.id}" 
+                    data-strategy="${strategy.id}">
+                    <div class="text-4xl md:text-5xl mb-3 group-hover:scale-125 transition-transform bounce-scale">${strategy.icon}</div>
+                    <div class="font-black text-base md:text-lg mb-2">${strategy.name}</div>
+                    <div class="text-sm md:text-base mb-2 opacity-90">${strategy.desc}</div>
+                    <div class="text-sm md:text-base text-blue-200 font-bold mb-1">Lợi nhuận: ${strategy.effect}</div>
+                    <div class="text-sm md:text-base font-black ${strategy.penalty.includes('Cộng') ? 'text-green-300' : 'text-red-300'}">${strategy.penalty}</div>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Show button only if controls are visible or has strategy
+        if (showInvestmentControls || round.hasStrategy) {
+          cardContent += `
+            <button class="submit-investment w-full py-4 rounded-2xl font-black text-xl text-white transition-all duration-500 hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-2xl shine-effect relative z-10 card-3d-transform" 
+              style="background: linear-gradient(135deg, ${group.color}, ${group.color}cc)" 
+              data-group="${group.id}"
+              ${round.sectors && showInvestmentControls ? 'disabled' : ''}>
+              <span class="flex items-center justify-center gap-3">
+                <span class="text-2xl md:text-3xl">✅</span>
+                <span>XÁC NHẬN ĐẦU TƯ</span>
+              </span>
+            </button>
+          `;
+        }
+
+        cardContent += `
+          <div class="message-container mt-4 relative z-10"></div>
+          
+          </div>
+        `;
+
+        card.innerHTML = cardContent;
+        container.appendChild(card);
+
+        if (round.sectors && showInvestmentControls) {
+          const sliders = card.querySelectorAll('.investment-slider');
+          sliders.forEach(slider => {
+            slider.addEventListener('input', () => {
+              updateGroupTotal(group.id, card);
+              slider.style.background = `linear-gradient(to right, ${group.color} 0%, ${group.color} ${slider.value}%, #e5e7eb ${slider.value}%, #e5e7eb 100%)`;
+              
+              const valueDisplay = card.querySelector(`#${group.id}-${slider.dataset.sector}-value`);
+              if (valueDisplay) {
+                valueDisplay.classList.add('wiggle-animation');
+                setTimeout(() => valueDisplay.classList.remove('wiggle-animation'), 500);
+              }
+            });
+            slider.style.background = `linear-gradient(to right, ${group.color} 0%, ${group.color} ${slider.value}%, #e5e7eb ${slider.value}%, #e5e7eb 100%)`;
+          });
+          updateGroupTotal(group.id, card);
+        }
+
+        if (round.hasStrategy) {
+          card.querySelectorAll('.strategy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const strategyId = this.dataset.strategy;
+              const strategy = round.strategies.find(s => s.id === strategyId);
+              
+              card.querySelectorAll('.strategy-btn').forEach(b => {
+                b.classList.remove('border-red-400', 'bg-gradient-to-br', 'from-red-400', 'to-red-600', 'border-green-400', 'from-green-400', 'to-green-600', 'shadow-2xl', 'strategy-card-selected', 'text-white');
+                b.classList.add('border-white/30', 'bg-white/10');
+              });
+              
+              this.classList.remove('border-white/30', 'bg-white/10');
+              this.classList.add(`border-${strategy.color}-400`, 'bg-gradient-to-br', `from-${strategy.color}-400`, `to-${strategy.color}-600`, 'shadow-2xl', 'strategy-card-selected', 'text-white');
+              
+              this.classList.add('card-flip-animate');
+              setTimeout(() => this.classList.remove('card-flip-animate'), 800);
+              
+              createSparkles(this);
+            });
+          });
+        }
+
+        const submitBtn = card.querySelector('.submit-investment');
+        if (submitBtn) {
+          submitBtn.addEventListener('click', () => submitInvestment(group.id, totalPoints, card, group.color));
+        }
+      });
+    }
+
+    function updateGroupTotal(groupId, card) {
+      const sliders = card.querySelectorAll('.investment-slider');
+      let total = 0;
+      
+      sliders.forEach(slider => {
+        const value = parseInt(slider.value) || 0;
+        total += value;
+        const valueDisplay = card.querySelector(`#${groupId}-${slider.dataset.sector}-value`);
+        if (valueDisplay) {
+          valueDisplay.textContent = value;
+        }
+      });
+
+      const totalDisplay = card.querySelector(`#${groupId}-total`);
+      const progressBar = card.querySelector(`#${groupId}-progress`);
+      const submitBtn = card.querySelector('.submit-investment');
+
+      if (totalDisplay) {
+        totalDisplay.textContent = `${total}/100`;
+      }
+      
+      if (progressBar) {
+        progressBar.style.width = `${total}%`;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = total !== 100;
+        if (total === 100) {
+          submitBtn.classList.add('pulse-ring');
+        } else {
+          submitBtn.classList.remove('pulse-ring');
+        }
+      }
+    }
+
+    async function submitInvestment(groupId, currentPoints, card, groupColor) {
+      if (allInvestments.length >= 999) {
+        showToast("⚠️ Đã đạt giới hạn 999 lần đầu tư!", "error");
+        return;
+      }
+
+      const submitBtn = card.querySelector('.submit-investment');
+      const messageContainer = card.querySelector('.message-container');
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span class="flex items-center justify-center gap-3">
+          <span class="loading-spinner"></span>
+          <span>ĐANG XỬ LÝ...</span>
+        </span>
+      `;
+
+      const investment = {
+        group_id: groupId,
+        group_name: GROUPS.find(g => g.id === groupId).name,
+        round: currentRound,
+        timestamp: new Date().toISOString(),
+        market_event: "",
+        bonus_earned: 0
+      };
+
+      const round = ROUNDS[currentRound];
+
+      if (round.sectors) {
+        round.sectors.forEach(sector => {
+          const slider = card.querySelector(`input[data-sector="${sector.id}"]`);
+          investment[sector.id] = parseInt(slider.value) || 0;
+        });
+
+        let penalty = 0;
+        if (currentRound === 1) {
+          Object.keys(investment).forEach(key => {
+            if (['savings', 'stocks', 'business', 'realestate', 'sustainable'].includes(key)) {
+              if (investment[key] > 50) {
+                penalty += 5;
+              }
+            }
+          });
+        }
+
+        let earnings = 0;
+        round.sectors.forEach(sector => {
+          earnings += (investment[sector.id] * sector.return / 100);
+        });
+
+        investment.earnings = Math.round(earnings);
+        investment.penalty = penalty;
+        investment.total_points = Math.round(currentPoints + earnings - penalty);
+      }
+
+      if (round.hasStrategy) {
+        const selectedBtn = card.querySelector('.strategy-card-selected');
+        if (selectedBtn) {
+          investment.strategy_choice = selectedBtn.dataset.strategy;
+          const strategy = round.strategies.find(s => s.id === investment.strategy_choice);
+          
+          if (strategy) {
+            const effectMatch = strategy.effect.match(/([+-]?\d+)%/);
+            const penaltyMatch = strategy.penalty.match(/([+-]?\d+)/);
+            
+            if (effectMatch) {
+              const percentage = parseFloat(effectMatch[1]) / 100;
+              investment.earnings = Math.round(currentPoints * percentage);
+            }
+            
+            if (penaltyMatch) {
+              const penaltyValue = parseInt(penaltyMatch[0]);
+              if (strategy.penalty.includes('Cộng')) {
+                investment.bonus_earned = Math.abs(penaltyValue);
+                investment.penalty = 0;
+              } else if (strategy.penalty.includes('Trừ')) {
+                investment.penalty = Math.abs(penaltyValue);
+                investment.bonus_earned = 0;
+              }
+            }
+            
+            investment.total_points = Math.round(currentPoints + (investment.earnings || 0) - (investment.penalty || 0) + (investment.bonus_earned || 0));
+          }
+        } else {
+          showInlineMessage(messageContainer, "⚠️ Vui lòng chọn chiến lược đầu tư!", "warning");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '<span class="flex items-center justify-center gap-3"><span class="text-2xl md:text-3xl">✅</span><span>XÁC NHẬN ĐẦU TƯ</span></span>';
+          return;
+        }
+      }
+
+      if (!investment.total_points) {
+        investment.total_points = currentPoints;
+      }
+
+      const result = await window.dataSdk.create(investment);
+      
+      if (result.isOk) {
+        showInlineMessage(messageContainer, "✅ Đầu tư thành công! Chúc mừng nhóm!", "success");
+        showToast(`${GROUPS.find(g => g.id === groupId).emoji} ${GROUPS.find(g => g.id === groupId).name} đã đầu tư thành công!`, "success");
+        createConfetti(groupColor);
+        submitBtn.innerHTML = '<span class="flex items-center justify-center gap-3"><span class="text-2xl md:text-3xl">✓</span><span>ĐÃ XÁC NHẬN</span></span>';
+      } else {
+        showInlineMessage(messageContainer, "❌ Có lỗi xảy ra. Vui lòng thử lại!", "error");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span class="flex items-center justify-center gap-3"><span class="text-2xl md:text-3xl">✅</span><span>XÁC NHẬN ĐẦU TƯ</span></span>';
+      }
+    }
+
+    function showInlineMessage(container, message, type) {
+      const colors = {
+        success: 'from-green-400 to-green-600 border-green-500',
+        error: 'from-red-400 to-red-600 border-red-500',
+        warning: 'from-yellow-400 to-yellow-600 border-yellow-500'
+      };
+      
+      container.innerHTML = `
+        <div class="bg-gradient-to-r ${colors[type]} border-l-4 p-4 rounded-xl text-white font-bold shadow-2xl pop-in shine-effect">
+          ${message}
+        </div>
+      `;
+      
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 5000);
+    }
+
+    function showToast(message, type) {
+      const colors = {
+        success: 'from-green-500 to-green-600',
+        error: 'from-red-500 to-red-600',
+        warning: 'from-yellow-500 to-yellow-600'
+      };
+      
+      const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️'
+      };
+      
+      const toastContainer = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `bg-gradient-to-r ${colors[type]} text-white px-6 py-4 rounded-2xl shadow-2xl max-w-sm pop-in shine-effect`;
+      toast.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="text-3xl bounce-scale">${icons[type]}</span>
+          <span class="font-bold text-base">${message}</span>
+        </div>
+      `;
+      
+      toastContainer.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(400px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+
+    function createConfetti(color) {
+      const colors = [color, '#ffd700', '#ff69b4', '#00ff00', '#ff4500', '#00f2fe'];
+      const shapes = ['💎', '⭐', '🌟', '✨', '🎉', '🎊', '💰', '🏆', '🔥', '⚡'];
+      
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti-particle';
+        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.fontSize = (Math.random() * 25 + 20) + 'px';
+        confetti.style.animationDelay = Math.random() * 0.5 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 4000);
+      }
+    }
+
+    function createSparkles(element) {
+      for (let i = 0; i < 10; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'absolute pointer-events-none';
+        sparkle.textContent = '✨';
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.fontSize = (Math.random() * 15 + 10) + 'px';
+        sparkle.classList.add('sparkle-effect');
+        element.appendChild(sparkle);
+        
+        setTimeout(() => sparkle.remove(), 1500);
+      }
+    }
+
+    function updateLeaderboard() {
+      const leaderboard = {};
+      
+      GROUPS.forEach(group => {
+        const groupInvestments = allInvestments.filter(inv => inv.group_id === group.id);
+        let totalPoints = 100;
+        let totalEarnings = 0;
+        let totalPenalty = 0;
+        let totalBonus = 0;
+        
+        groupInvestments.forEach(inv => {
+          totalPoints = inv.total_points;
+          totalEarnings += (inv.earnings || 0);
+          totalPenalty += (inv.penalty || 0);
+          totalBonus += (inv.bonus_earned || 0);
+        });
+        
+        leaderboard[group.id] = {
+          ...group,
+          points: totalPoints,
+          earnings: totalEarnings,
+          penalty: totalPenalty,
+          bonus: totalBonus,
+          investments: groupInvestments.length
+        };
+      });
+
+      const sorted = Object.values(leaderboard).sort((a, b) => b.points - a.points);
+      
+      const awards = [
+        { title: "Nhà đầu tư thông minh", icon: "🧠", gradient: "from-yellow-400 via-yellow-500 to-amber-600" },
+        { title: "Chiến lược gia", icon: "🎯", gradient: "from-gray-300 via-gray-400 to-gray-500" },
+        { title: "Nhà đầu tư bền vững", icon: "🌱", gradient: "from-orange-400 via-orange-500 to-red-500" },
+        { title: "Nhà đầu tư mạo hiểm", icon: "🚀", gradient: "from-blue-400 via-blue-500 to-indigo-600" },
+        { title: "Học viên tiềm năng", icon: "📚", gradient: "from-purple-400 via-purple-500 to-pink-500" }
+      ];
+
+      const leaderboardList = document.getElementById('leaderboard-list');
+      leaderboardList.innerHTML = sorted.map((group, index) => `
+        <div class="relative overflow-hidden bg-gradient-to-r ${awards[index].gradient} rounded-3xl p-6 text-white shadow-2xl hover:scale-105 transition-all duration-500 cursor-pointer card-3d-transform shine-effect">
+          <div class="absolute inset-0 holographic-effect opacity-30 pointer-events-none"></div>
+          <div class="relative flex items-center gap-4 md:gap-6 z-10">
+            <div class="flex-shrink-0">
+              <div class="text-5xl md:text-8xl font-black opacity-70">#${index + 1}</div>
+            </div>
+            <div class="float-smooth flex-shrink-0">
+              <div class="text-5xl md:text-7xl">${group.character}</div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-3xl bounce-scale">${group.emoji}</span>
+                <span class="text-xl md:text-3xl font-black truncate">${group.name}</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm md:text-base mb-3">
+                <span class="text-2xl">${awards[index].icon}</span>
+                <span class="font-black">${awards[index].title}</span>
+              </div>
+              <div class="grid grid-cols-2 md:flex md:flex-wrap gap-2 text-xs md:text-sm">
+                <span class="bg-white/30 px-3 py-1 rounded-full font-bold shine-effect">📊 ${group.investments}/3</span>
+                <span class="bg-white/30 px-3 py-1 rounded-full font-bold shine-effect">💰 +${group.earnings}</span>
+                <span class="bg-white/30 px-3 py-1 rounded-full font-bold shine-effect">⚠️ -${group.penalty}</span>
+                <span class="bg-white/30 px-3 py-1 rounded-full font-bold shine-effect">🎁 +${group.bonus}</span>
+              </div>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <div class="text-4xl md:text-6xl font-black mb-2 glow-pulse">${group.points}</div>
+              <div class="text-sm md:text-base font-bold">điểm</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function displayVictoryScreen() {
+      const leaderboard = {};
+      
+      GROUPS.forEach(group => {
+        const groupInvestments = allInvestments.filter(inv => inv.group_id === group.id);
+        let totalPoints = 100;
+        let totalEarnings = 0;
+        let totalPenalty = 0;
+        let totalBonus = 0;
+        
+        groupInvestments.forEach(inv => {
+          totalPoints = inv.total_points;
+          totalEarnings += (inv.earnings || 0);
+          totalPenalty += (inv.penalty || 0);
+          totalBonus += (inv.bonus_earned || 0);
+        });
+        
+        leaderboard[group.id] = {
+          ...group,
+          points: totalPoints,
+          earnings: totalEarnings,
+          penalty: totalPenalty,
+          bonus: totalBonus,
+          investments: groupInvestments.length
+        };
+      });
+
+      const sorted = Object.values(leaderboard).sort((a, b) => b.points - a.points);
+      const winner = sorted[0];
+      const secondPlace = sorted[1];
+      const thirdPlace = sorted[2];
+
+      const victoryScreen = document.getElementById('victory-screen');
+      victoryScreen.innerHTML = `
+        <div class="glass-morphism rounded-3xl p-10 md:p-20 mb-8 text-center pop-in overflow-hidden relative shadow-2xl">
+          <div class="absolute inset-0 holographic-effect opacity-40 pointer-events-none"></div>
+          <div class="relative z-10">
+            <div class="float-smooth inline-block mb-8">
+              <span class="text-9xl md:text-[12rem] glow-pulse">🏆</span>
+            </div>
+            <h2 class="text-6xl md:text-9xl font-black text-white mb-8 text-neon">CHÚC MỪNG CHIẾN THẮNG</h2>
+            <div class="bg-gradient-to-r ${winner.gradient} rounded-3xl p-8 md:p-12 shadow-2xl mb-8 border-4 border-white/50 shine-effect">
+              <div class="text-8xl md:text-[10rem] mb-6 float-smooth">${winner.character}</div>
+              <div class="flex items-center justify-center gap-4 mb-4">
+                <span class="text-7xl bounce-scale">${winner.emoji}</span>
+                <h3 class="text-4xl md:text-7xl font-black text-white">${winner.name}</h3>
+              </div>
+              <div class="text-7xl md:text-9xl font-black text-white mb-6 glow-pulse">${winner.points} ĐIỂM</div>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white/30 backdrop-blur-lg px-5 py-4 rounded-2xl shine-effect">
+                  <div class="text-3xl mb-2">💰</div>
+                  <div class="text-white font-black text-lg">Lãi: +${winner.earnings}</div>
+                </div>
+                <div class="bg-white/30 backdrop-blur-lg px-5 py-4 rounded-2xl shine-effect">
+                  <div class="text-3xl mb-2">⚠️</div>
+                  <div class="text-white font-black text-lg">Phạt: -${winner.penalty}</div>
+                </div>
+                <div class="bg-white/30 backdrop-blur-lg px-5 py-4 rounded-2xl shine-effect">
+                  <div class="text-3xl mb-2">🎁</div>
+                  <div class="text-white font-black text-lg">Thưởng: +${winner.bonus}</div>
+                </div>
+                <div class="bg-white/30 backdrop-blur-lg px-5 py-4 rounded-2xl shine-effect">
+                  <div class="text-3xl mb-2">📊</div>
+                  <div class="text-white font-black text-lg">${winner.investments}/3 vòng</div>
+                </div>
+              </div>
+              <div class="inline-block bg-white/40 backdrop-blur-lg px-8 py-4 rounded-2xl shine-effect">
+                <p class="text-2xl md:text-4xl font-black text-white">🌟 NHÀ ĐẦU TƯ THÔNG MINH NHẤT 🌟</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+              <div class="order-2 md:order-2">
+                <div class="glass-morphism rounded-3xl p-8 border-4 border-yellow-400 shadow-2xl transform hover:scale-110 transition-all card-3d-transform">
+                  <div class="text-7xl mb-4">🥇</div>
+                  <div class="text-6xl mb-3 float-smooth">${winner.character}</div>
+                  <h4 class="text-2xl font-black text-white mb-3">${winner.name}</h4>
+                  <div class="text-5xl font-black text-yellow-400 mb-2">${winner.points}</div>
+                </div>
+              </div>
+
+              ${secondPlace ? `
+              <div class="order-1 md:order-1 mt-10 md:mt-16">
+                <div class="glass-morphism rounded-3xl p-8 border-4 border-gray-300 shadow-2xl transform hover:scale-110 transition-all card-3d-transform">
+                  <div class="text-6xl mb-4">🥈</div>
+                  <div class="text-5xl mb-3 float-smooth">${secondPlace.character}</div>
+                  <h4 class="text-xl font-black text-white mb-3">${secondPlace.name}</h4>
+                  <div class="text-4xl font-black text-gray-300 mb-2">${secondPlace.points}</div>
+                </div>
+              </div>
+              ` : ''}
+
+              ${thirdPlace ? `
+              <div class="order-3 md:order-3 mt-10 md:mt-16">
+                <div class="glass-morphism rounded-3xl p-8 border-4 border-orange-400 shadow-2xl transform hover:scale-110 transition-all card-3d-transform">
+                  <div class="text-6xl mb-4">🥉</div>
+                  <div class="text-5xl mb-3 float-smooth">${thirdPlace.character}</div>
+                  <h4 class="text-xl font-black text-white mb-3">${thirdPlace.name}</h4>
+                  <div class="text-4xl font-black text-orange-400 mb-2">${thirdPlace.points}</div>
+                </div>
+              </div>
+              ` : ''}
+            </div>
+
+            <div class="mt-12 glass-morphism rounded-3xl p-8 md:p-10">
+              <h3 class="text-4xl md:text-6xl font-black text-white mb-8 text-neon">📊 BẢNG TỔNG KẾT</h3>
+              <div class="space-y-5">
+                ${sorted.map((group, index) => {
+                  const awards = ["Nhà đầu tư thông minh", "Chiến lược gia", "Nhà đầu tư bền vững", "Nhà đầu tư mạo hiểm", "Học viên tiềm năng"];
+                  return `
+                  <div class="bg-gradient-to-r ${group.gradient} rounded-3xl p-6 shadow-2xl shine-effect">
+                    <div class="flex items-center gap-4">
+                      <div class="text-4xl md:text-5xl font-black text-white/70">#${index + 1}</div>
+                      <div class="text-5xl md:text-6xl float-smooth">${group.character}</div>
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-2">
+                          <span class="text-3xl">${group.emoji}</span>
+                          <h4 class="text-xl md:text-3xl font-black text-white">${group.name}</h4>
+                        </div>
+                        <div class="text-base text-white/90 font-bold mb-2">${awards[index]}</div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm text-white/90 font-bold">
+                          <span>📊 ${group.investments}/3</span>
+                          <span>💰 +${group.earnings}</span>
+                          <span>⚠️ -${group.penalty}</span>
+                          <span>🎁 +${group.bonus}</span>
+                        </div>
+                      </div>
+                      <div class="text-4xl md:text-6xl font-black text-white glow-pulse">${group.points}</div>
+                    </div>
+                  </div>
+                `}).join('')}
+              </div>
+            </div>
+
+            <div class="mt-10 glass-morphism rounded-3xl p-8 md:p-10 border-4 border-white/50">
+              <div class="text-5xl mb-4 bounce-scale">💎</div>
+              <h3 class="text-3xl md:text-5xl font-black text-white mb-6 text-neon">BÀI HỌC THỊ TRƯỜNG</h3>
+              <p class="text-xl md:text-3xl text-white leading-relaxed font-bold">
+                <strong>Đầu tư không chỉ là lợi nhuận</strong>,<br>
+                mà còn là <strong>trách nhiệm</strong>, <strong>chiến lược</strong> và <strong>sự bền vững</strong> 🌱
+              </p>
+              <p class="text-lg md:text-2xl text-white/80 mt-6 font-bold">
+                Chúc mừng tất cả đã hoàn thành hành trình đầu tư! 🎉
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      setTimeout(() => {
+        for (let i = 0; i < 8; i++) {
+          setTimeout(() => {
+            createConfetti(winner.color);
+          }, i * 400);
+        }
+      }, 500);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b59e731f36f0437',t:'MTc2NzAxNzY1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
